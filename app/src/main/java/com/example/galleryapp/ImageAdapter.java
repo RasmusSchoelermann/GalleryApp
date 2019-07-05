@@ -19,11 +19,13 @@ import java.util.List;
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private Context mContext;
     private List<Upload> mUploads;
+    private List<Upload> tempmUploads;
     private OnItemClickListener mListener;
 
     public ImageAdapter(Context context, List<Upload> uploads) {
         mContext = context;
         mUploads = uploads;
+
     }
 
     @Override
@@ -34,14 +36,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
-        Upload uploadCurrent = mUploads.get(position);
-        holder.textViewName.setText(uploadCurrent.getName());
-        Picasso.get()//mContext
-                .load(uploadCurrent.getImageUrl())
-                .placeholder(R.mipmap.ic_launcher)
-                .fit()
-                .centerCrop()
-                .into(holder.imageView);
+            Upload uploadCurrent = mUploads.get((mUploads.size() - 1)  - position);
+            holder.textViewName.setText(uploadCurrent.getName());
+            Picasso.get()//mContext
+                    .load(uploadCurrent.getImageUrl())
+                    .placeholder(R.mipmap.ic_launcher)
+                    .fit()
+                    .centerCrop()
+                    .into(holder.imageView);
     }
 
     @Override
