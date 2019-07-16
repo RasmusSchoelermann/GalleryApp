@@ -1,12 +1,16 @@
 package com.example.galleryapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.support.v7.widget.GridLayoutManager;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +29,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     private ImageAdapter mAdapter;
 
     private ProgressBar mProgressCircle;
+    private Button mButtonGoToUpload;
 
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
@@ -37,9 +42,19 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
 
-        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.View);
+        mButtonGoToUpload = findViewById(R.id.Upload_Button);
+
+        mButtonGoToUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUploadActivity();
+            }
+        });
+
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
+
 
         mProgressCircle = findViewById(R.id.progress_circle);
 
@@ -108,6 +123,11 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     protected void onDestroy() {
         super.onDestroy();
         mDatabaseRef.removeEventListener(mDBListener);
+    }
+
+    private void openUploadActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
 

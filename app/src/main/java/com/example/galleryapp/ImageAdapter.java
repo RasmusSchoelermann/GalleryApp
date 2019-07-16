@@ -37,7 +37,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
             Upload uploadCurrent = mUploads.get((mUploads.size() - 1)  - position);
-            holder.textViewName.setText(uploadCurrent.getName());
+            //holder.textViewName.setText(uploadCurrent.getName());
             Picasso.get()//mContext
                     .load(uploadCurrent.getImageUrl())
                     .placeholder(R.mipmap.ic_launcher)
@@ -59,7 +59,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         public ImageViewHolder(View itemView) {
             super(itemView);
 
-            textViewName = itemView.findViewById(R.id.text_view_name);
+            //textViewName = itemView.findViewById(R.id.text_view_name);
             imageView = itemView.findViewById(R.id.image_view_upload);
 
             itemView.setOnClickListener(this);
